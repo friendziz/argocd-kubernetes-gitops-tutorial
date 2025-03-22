@@ -1,0 +1,17 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: n796-vpod1-vc1
+  namespace: argocd
+spec:
+  project: default
+  source:
+    repoURL: https://github.com/friendziz/argocd-kubernetes-gitops-tutorial.git
+    targetRevision: main
+    path: vclusters/n796-vpod1-vc1
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: n796-vpod1-vc1
+  syncPolicy:
+    syncOptions:
+      - CreateNamespace=true

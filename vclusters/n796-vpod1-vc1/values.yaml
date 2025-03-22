@@ -28,7 +28,7 @@ vcluster:
       annotations:
         meta.helm.sh/release-name: n796-vpod1-vcluster1
         meta.helm.sh/release-namespace: n796-vpod1-vc1
-        metallb.universe.tf/ip-allocated-from-pool: ecfe-oam
+        metallb.io/ip-allocated-from-pool: ecfe-oam
       labels:
         app: vcluster
         app.kubernetes.io/managed-by: Helm
@@ -37,3 +37,8 @@ vcluster:
         release: n796-vpod1-vcluster1
   telemetry:
     enabled: false
+  exportKubeConfig:
+    context: vc-vdu1-context
+    server: https://214.24.132.227
+    secret:
+      name: vc-vdu1-domain
