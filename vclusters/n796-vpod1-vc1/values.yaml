@@ -1,0 +1,39 @@
+vcluster:
+  sync:
+    fromHost:
+      nodes:
+        enabled: true
+        selector:
+          all: true
+      storageClasses:
+        enabled: true
+  controlPlane:
+    distro:
+      k8s:
+        version: v1.30.2
+    statefulSet:
+      image:
+        repository: loft-sh/vcluster
+    service:
+      enabled: true
+      spec:
+        type: LoadBalancer
+        allocateLoadBalancerNodePorts: true
+        ports:
+        - name: https
+          nodePort: 30127
+          port: 443
+          protocol: TCP
+          targetPort: 8443
+      annotations:
+        meta.helm.sh/release-name: n796-vpod1-vcluster1
+        meta.helm.sh/release-namespace: n796-vpod1-vc1
+        metallb.universe.tf/ip-allocated-from-pool: ecfe-oam
+      labels:
+        app: vcluster
+        app.kubernetes.io/managed-by: Helm
+        chart: vcluster-0.24.0
+        heritage: Helm
+        release: n796-vpod1-vcluster1
+  telemetry:
+    enabled: false
